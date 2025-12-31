@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects by Skill</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Projects by Skill</h1>
+    </header>
+    <main>
+        <div id="projects-container"></div>
+    </main>
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const skill = urlParams.get('skill');
+        const lang = document.getElementById('languageSelect').value || 'en';
+
+        fetch('/api/projects')
+            .then(response => response.json())
+            .then(projects => {
+                const filteredProjects = projects.filter(project =>
+                    project.skills.some(s => s.name === skill) && project.title[lang]
+                ).map(project => ({
+                    ...project,
+                    title: project.title[lang],
+                    description: project.description[lang],
+                    image: project.image[lang] || project.image['en']
+                }));
+
+                const projectsContainer = document.getElementById('projects-container');
+                projectsContainer.innerHTML = '';
+                filteredProjects.forEach(project => {
+                    const projectCard = document.createElement('div');
+                    projectCard.className = 'project-card';
+                    projectCard.innerHTML = `
+                        <img src="${project.image}" alt="${project.title}">
+                        <h3>${project.title}</h3>
+                        <p>${project.description}</p>
+                    `;
+                    projectsContainer.appendChild(projectCard);
+                });
+            });
+    </script>
+</body>
+</html>

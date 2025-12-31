@@ -1,0 +1,46 @@
+[
+    {
+        "id": 1,
+        "title": {
+            "en": "AI Project",
+            "es": "Proyecto de IA"
+        },
+        "description": {
+            "en": "An advanced AI project.",
+            "es": "Un proyecto avanzado de IA."
+        },
+        "tags": ["AI", "Machine Learning"],
+        "language": "Python",
+        "topic": "Artificial Intelligence",
+        "image": {
+            "en": "/images/ai_project.jpg",
+            "es": "/images/ai_project_es.jpg"
+        },
+        "skills": [
+            { "name": "Python", "relevance": 90 },
+            { "name": "Machine Learning", "relevance": 80 }
+        ]
+    },
+    {
+        "id": 2,
+        "title": {
+            "en": "Web Development Project",
+            "es": "Proyecto de Desarrollo Web"
+        },
+        "description": {
+            "en": "A modern web development project.",
+            "es": "Un proyecto moderno de desarrollo web."
+        },
+        "tags": ["Web", "JavaScript"],
+        "language": "JavaScript",
+        "topic": "Web Development",
+        "image": {
+            "en": "/images/web_project.jpg",
+            "es": "/images/web_project_es.jpg"
+        },
+        "skills": [
+            { "name": "JavaScript", "relevance": 95 },
+            { "name": "CSS", "relevance": 85 }
+        ]
+    }
+]

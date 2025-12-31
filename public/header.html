@@ -1,0 +1,63 @@
+<header class="Header">
+    <div class="ProfileAvatar">
+        <img src="assets/profile.jpg" alt="Profile" style="width: 100%; height: 100%; object-fit: cover;">
+    </div>
+    <nav class="MainNav" role="navigation" aria-label="Main site navigation">
+        <ul class="NavList" style="display: flex; gap: 12px; margin: 0; padding: 0; list-style: none; align-items: center;">
+            <li class="NavItem" style="margin: 0;">
+                <a class="NavLink" href="#" onclick="loadPage('home'); return false;" data-i18n="home">Home</a>
+            </li>
+            <li class="NavItem" style="margin: 0;">
+                <a class="NavLink" href="#" onclick="loadPage('publicationsAndConferences'); return false;" data-i18n="publications_and_conferences">Publications & Conferences</a>
+            </li>
+            <li class="NavItem" style="margin: 0;">
+                <a class="NavLink" href="#" onclick="loadPage('educationAndEmployment'); return false;" data-i18n="employment_and_education">Education & Employment</a>
+            </li>
+        </ul>
+    </nav>
+    <div class="langSelector">
+        <select id="languageSelect" name="language" aria-label="Select language">
+            <option value="en" selected>English (EN)</option>
+            <option value="es">Español (ES)</option>
+            <option value="ja">日本語 (JP)</option>
+            <option value="ru">Русский (RU)</option>
+            <option value="fr">Français (FR)</option>
+        </select>
+    </div>
+</header>
+<script src="translations.js"></script>
+<script src="script.js"></script>
+<script>
+    document.getElementById('languageSelect').addEventListener('change', function() {
+        const selectedLang = this.value;
+        translatePage(selectedLang);
+    });
+    //register the translations for the header
+    registerTranslations({
+        en: {
+            home: "Home",
+            publications_and_conferences: "Publications & Conferences",
+            employment_and_education: "Education & Employment"
+        },
+        es: {
+            home: "Inicio",
+            publications_and_conferences: "Publicaciones y Conferencias",
+            employment_and_education: "Educación y Empleo"
+        },
+        ja: {
+            home: "ホーム",
+            publications_and_conferences: "出版物と会議",
+            employment_and_education: "学歴と雇用"
+        },
+        ru: {
+            home: "Главная",
+            publications_and_conferences: "Публикации и конференции",
+            employment_and_education: "Образование и трудоустройство"
+        },
+        fr: {
+            home: "Accueil",
+            publications_and_conferences: "Publications et Conférences",
+            employment_and_education: "Éducation et Emploi"
+        }
+    });
+</script>

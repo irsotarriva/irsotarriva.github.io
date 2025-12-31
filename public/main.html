@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Isai Sotarriva's home page</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="translations.js"></script>
+</head>
+<body>
+    <!-- Include header -->
+    <div id="header-placeholder"></div>
+    <main id="main-content">
+        <!-- Get the content based on the page the user is currently visiting (home, publications and conferences, education and employment) -->
+    </main>
+    <script>
+        (async () => {
+            // fetch header HTML and insert it into the page
+            const headerHtml = await fetch('header.html').then(res => res.text());
+            document.getElementById('header-placeholder').innerHTML = headerHtml;
+
+            /*!
+             * @brief Execute <script> tags found in an HTML string in order (handles inline and external).
+             * @param {string} htmlString - HTML text to scan for script tags.
+             * @param {string} [baseUrl] - Base URL to resolve relative script src attributes.
+             * @return {Promise<void>}
+             * @public
+             */
+            async function executeScriptsFromString(htmlString, baseUrl) {
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(htmlString, 'text/html');
+                const scripts = Array.from(doc.querySelectorAll('script'));
+                for (const s of scripts) {
+                    const src = s.getAttribute('src');
+                    if (src) {
+                        // external script: create element with resolved URL and wait for it to load
+                        await new Promise((resolve) => {
+                            const scriptEl = document.createElement('script');
+                            // resolve relative URLs against current location
+                            scriptEl.src = new URL(src, window.location.href).href;
+                            scriptEl.onload = resolve;
+                            scriptEl.onerror = resolve; // continue even on error
+                            document.body.appendChild(scriptEl);
+                        });
+                    } else {
+                        // inline script: run it by creating a script element
+                        const inline = document.createElement('script');
+                        inline.text = s.textContent;
+                        document.body.appendChild(inline);
+                        // keep inline script (browsers execute it when appended)
+                    }
+                }
+            }
+
+            // Execute scripts that were embedded in header.html (this will run registerTranslations and attach listeners)
+            await executeScriptsFromString(headerHtml);
+
+            // Ensure the page uses currently selected language after header scripts ran
+            const currentLang = document.getElementById('languageSelect')?.value || 'en';
+            if (typeof translatePage === 'function') {
+                translatePage(currentLang);
+            }
+
+            // Fetch and display the main content based on calls from the navigation
+            const tabToPage = {
+                home: 'home.html',
+                publicationsAndConferences: 'publications_and_conferences.html',
+                educationAndEmployment: 'education_and_employment.html',
+                detailPage: 'detail_page.html'
+            };
+
+            /*!
+            @brief Load page content into #main-content and execute any scripts found in it.
+            @param {string} page - Key for tabToPage mapping.
+            @return {Promise<void>}
+            @public
+            */
+            async function loadPage(page) {
+                const pageUrl = tabToPage[page];
+                if (!pageUrl) return;
+
+                const content = await fetch(pageUrl).then(res => res.text());
+                const mainEl = document.getElementById('main-content');
+                if (!mainEl) return;
+
+                // insert DOM so elements exist for scripts
+                mainEl.innerHTML = content;
+
+                // if helper exists, use it to execute scripts (preserves order and handles external scripts)
+                if (typeof executeScriptsFromString === 'function') {
+                    await executeScriptsFromString(content, window.location.href);
+                    return;
+                }
+
+                // fallback: manually run scripts found in the inserted content
+                const scripts = Array.from(mainEl.querySelectorAll('script'));
+                for (const s of scripts) {
+                    const src = s.getAttribute('src');
+                    if (src) {
+                        await new Promise(resolve => {
+                            const scriptEl = document.createElement('script');
+                            scriptEl.src = new URL(src, window.location.href).href;
+                            scriptEl.onload = resolve;
+                            scriptEl.onerror = resolve;
+                            document.body.appendChild(scriptEl);
+                        });
+                    } else {
+                        const inline = document.createElement('script');
+                        inline.text = s.textContent;
+                        document.body.appendChild(inline);
+                    }
+                }
+            }
+            // Load the home page by default
+            await loadPage('home');
+            // Expose loadPage to global scope
+            window.loadPage = loadPage;
+
+            // Add event listeners for navigation
+            document.querySelectorAll('nav a').forEach(link => {
+                link.addEventListener('click', (event) => {
+                    event.preventDefault();
+                    const page = event.target.getAttribute('data-page');
+                    loadPage(page);
+                });
+            });
+        })();
+    </script>
+</body>
+</html>

@@ -1,0 +1,236 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: hsl(208, 2%, 100%);
+    color: #000;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: hsl(208, 60%, 20%);
+    color: #fff;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Ensure even spacing between elements */
+    flex-wrap: nowrap; /* Prevent wrapping of elements */
+    gap: 1rem; /* Add spacing between elements */
+}
+
+header input, header select {
+    padding: 0.5rem;
+    margin-left: 1rem;
+}
+
+#projects-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1rem;
+    padding: 1rem;
+}
+
+.project-card {
+    background-color: #fff;
+    border: 1px solid #000;
+    border-radius: 5px;
+    padding: 1rem;
+    text-align: center;
+}
+
+.project-card img {
+    max-width: 100%;
+    border-radius: 5px;
+}
+
+.NavLink {
+    color: #fff;
+    background-color: transparent;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.NavLink:hover {
+    background-color: hsl(208, 60%, 60%);
+    color: #000;
+}
+
+.NavLink:visited {
+    color: #fff;
+    background-color: transparent;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.ProfileAvatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid #fff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    background-color: #ddd;
+    flex-shrink: 0; /* Prevent shrinking */
+    margin-right: 1rem; /* Add spacing between the avatar and the nav */
+}
+
+.MainNav {
+    display: flex;
+    justify-content: center; /* Center the navigation items */
+    flex: 1; /* Allow the nav to take up available space */
+    margin: 0; /* Reset any default margins */
+}
+
+.langSelector {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+    margin-left: 1rem; /* Add spacing between the nav and the language selector */
+    flex-shrink: 0; /* Prevent shrinking */
+    vertical-align: middle;
+}
+
+.story-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    gap: 20px;
+    height: 400px; /* Ensure consistent height */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.story-section.reverse {
+    flex-direction: row-reverse;
+}
+
+.story-content {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+}
+
+.story-image {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.story-image img {
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+.carousel {
+    position: relative;
+    display: flex;
+    overflow: hidden;
+}
+
+.carousel img {
+    flex-shrink: 0;
+    width: 100%;
+    transition: transform 0.5s ease-in-out;
+}
+
+.carousel:hover img {
+    transform: translateX(-100%);
+}
+
+.story-text {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+}
+
+.story-text h2 {
+    font-size: 1.5rem;
+    color: hsl(208, 60%, 20%);
+}
+
+.story-text p {
+    font-size: 1rem;
+    color: hsl(208, 20%, 40%);
+}
+
+@media (min-width: 700px) {
+    .container {
+        flex-direction: row;
+    }
+
+    .content {
+        flex: 1;
+    }
+    .quickActions {
+        width: 300px;
+        flex-shrink: 0;
+        border-left: 2px solid hsl(208, 60%, 60%);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        padding-left: 10px;
+        box-sizing: border-box;
+
+        /* Make the bar span the available viewport height below the header */
+        align-self: stretch;
+        position: sticky;
+        top: var(--header-height, 64px); /* set --header-height on :root if you know the header height */
+        height: calc(100vh - var(--header-height, 64px));
+        overflow: auto; /* allow internal scrolling if content exceeds the available height */
+    }
+
+    header {
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        gap: 1rem;
+    }
+
+    .ProfileAvatar {
+        order: 1;
+    }
+
+    .MainNav {
+        order: 2;
+        width: 100%;
+        display: flex;
+        justify-content: flex-start; /* Align items to the left */
+        flex: 1; /* Allow the nav to take up remaining space */
+    }
+
+    .langSelector {
+        order: 3;
+        align-self: flex-start;
+        vertical-align: middle;
+    }
+}
+
+@media (max-width: 250px) {
+    .ProfileAvatar {
+        display: none;
+    }
+
+    .MainNav {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .langSelector {
+        align-self: flex-start;
+        margin-top: 1rem;
+        vertical-align: middle;
+    }
+}
