@@ -1,30 +1,653 @@
-<main>
-    <h1 style="font-size: 2rem; margin: 0; color: #333;" data-i18n="name">Isai Roberto Sotarriva Alvarez</h1>
-    <p style="font-size: 1.2rem; margin: 5px 0; color: #555;" data-i18n="job_title">Physics Ph.D. | Machine Learning Engineer | Expertise in Statistical Analysis & Data Science</p>
-    <div class="QuickActions" style="display: flex; gap: 16px; margin-top: 10px;">
-        <!-- Research -->
-        <a href="https://scholar.google.com/citations?user=cljeSm4AAAAJ&hl=en" target="_blank" title="Google Scholar" style="text-decoration: none;">
-            <img src="assets/google_scholar_icon.png" alt="Google Scholar" style="height: 32px;">
-        </a>
-        <a href="https://orcid.org/0009-0001-8347-0803" target="_blank" title="ORCID" style="text-decoration: none;">
-            <img src="assets/orcid_icon.svg" alt="ORCID" style="height: 32px;">
-        </a>
-        <!-- Code -->
-        <a href="https://github.com/irsotarriva" target="_blank" title="GitHub" style="text-decoration: none;">
-            <img src="assets/github_icon.svg" alt="GitHub" style="height: 32px;">
-        </a>
-        <a href="https://www.kaggle.com/irsotarriva" target="_blank" title="Kaggle" style="text-decoration: none;">
-            <img src="assets/kaggle_icon.png" alt="Kaggle" style="height: 32px;">
-        </a>
-        <!-- General Info -->
-        <a href="https://www.linkedin.com/in/irsotarriva/" target="_blank" title="LinkedIn" style="text-decoration: none;">
-            <img src="assets/linkedin_icon.png" alt="LinkedIn" style="height: 32px;">
-        </a>
-        <a href="mailto:irsotarriva@gmail.com" title="Email" style="text-decoration: none;">
-            <img src="assets/mail_icon.svg" alt="Email" style="height: 32px;">
-        </a>
-        <a href="tel:+818025963157" title="Phone" style="text-decoration: none;">
-            <img src="assets/phone_icon.svg" alt="Phone" style="height: 32px;">
-        </a>
-    </div>
+<main class="cv-section">
+
+    <style>
+        /* Simple card grid for resume entries */
+        .cv-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .cv-card {
+            display: flex;
+            flex-direction: column;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+            background: #fff;
+        }
+
+        .cv-card .card-image {
+            height: 140px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .cv-card .card-body {
+            padding: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .cv-card h3 {
+            margin: 0;
+            font-size: 1rem;
+        }
+
+        .cv-card .meta {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .cv-card .summary {
+            margin: 6px 0 0 0;
+            font-size: 0.95rem;
+        }
+
+        .cv-card .links {
+            margin-top: auto;
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .cv-card .links a {
+            background: #f3f3f3;
+            padding: 6px 8px;
+            border-radius: 6px;
+            text-decoration: none;
+            color: #066;
+            font-size: 0.85rem;
+        }
+    </style>
+
+    <!-- Education -->
+    <section class="cv-block">
+        <h2 data-i18n="education_title">Education</h2>
+
+        <div class="cv-grid">
+            <!-- PhD -->
+            <article class="cv-card">
+                <div class="card-image" style="background-image: url('/assets/atlas_front.jpg');" role="img"
+                    aria-label="" data-i18n-attr="phd_image_alt"></div>
+
+                <div class="card-body">
+                    <h3 data-i18n="phd_name">Doctor of Philosophy (Ph.D.) in Physics</h3>
+                    <div class="meta" data-i18n="phd_location">Institute of Science Tokyo (formerly Tokyo Institute of
+                        Technology)</div>
+                    <div class="meta" data-i18n="phd_time">September 2022 – expected June 2026</div>
+                    <div class="summary" data-i18n="phd_summary">Ph.D. research in experimental particle physics focused
+                        on statistical modeling and machine learning methods for background estimation in diphoton
+                        analyses within the ATLAS collaboration.</div>
+
+                    <div class="links" data-i18n-attr="phd_links">
+                        <!-- links populated via translations (may contain <a> tags) -->
+                    </div>
+                </div>
+            </article>
+
+            <!-- Master's -->
+            <article class="cv-card">
+                <div class="card-image" style="background-image: url('/assets/IMG_20230329_164424197.jpg');" role="img"
+                    aria-label="" data-i18n-attr="master_image_alt"></div>
+
+                <div class="card-body">
+                    <h3 data-i18n="master_name">Master’s Degree in Physics</h3>
+                    <div class="meta" data-i18n="master_location">Tokyo Institute of Technology</div>
+                    <div class="meta" data-i18n="master_time">September 2020 – September 2022</div>
+                    <div class="summary" data-i18n="master_summary">Master’s research on quality control for
+                        semiconductor pixel detectors, including image processing pipelines for visual inspection, image
+                        stitching, and robust feature extraction under production constraints.</div>
+
+                    <div class="links" data-i18n-attr="master_links"></div>
+                </div>
+            </article>
+
+            <!-- Bachelor's -->
+            <article class="cv-card">
+                <div class="card-image" style="background-image: url('/assets/covarianceMatrix.jpg');" role="img"
+                    aria-label="" data-i18n-attr="bachelor_image_alt"></div>
+
+                <div class="card-body">
+                    <h3 data-i18n="bachelor_name">Bachelor’s Degree in Physics</h3>
+                    <div class="meta" data-i18n="bachelor_location">Universidad Nacional Autónoma de México (UNAM)</div>
+                    <div class="meta" data-i18n="bachelor_time">August 2014 – October 2019</div>
+                    <div class="summary" data-i18n="bachelor_summary">Undergraduate studies in physics with research
+                        experience in Monte Carlo simulations and data analysis, including machine learning–based
+                        classification and feature analysis using ROOT TMVA.</div>
+                    <div class="links" data-i18n-attr="bachelor_links"></div>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <!-- Employment -->
+    <section class="cv-block">
+        <h2 data-i18n="employment_title">Employment</h2>
+        <div class="cv-grid">
+            <!-- ToTAL -->
+            <article class="cv-card">
+                <div class="card-image"
+                    style="background-image: url('https://www.total.titech.ac.jp/wp/wp-content/uploads/2023/10/DSC00629-1024x683.jpg');"
+                    role="img" aria-label="" data-i18n-attr="total_image_alt"></div>
+
+                <div class="card-body">
+                    <h3 data-i18n="total_name">Educational Support Staff — ToTAL</h3>
+                    <div class="meta" data-i18n="total_location">Tokyo Tech Academy for Leadership, Tokyo Institute of
+                        Technology</div>
+                    <div class="meta" data-i18n="total_time">April 2023 – present</div>
+                    <div class="summary" data-i18n="total_summary">Educational support for leadership development
+                        programs, including workshop facilitation, technical coordination, and support for interactive
+                        and discussion-based sessions.</div>
+
+                    <div class="links" data-i18n-attr="total_links"></div>
+                </div>
+            </article>
+
+            <!-- TA DSAI -->
+            <article class="cv-card">
+                <div class="card-image" style="background-image: url('/assets/MoEBagging.jpg');" role="img"
+                    aria-label="" data-i18n-attr="ta_dsai_image_alt"></div>
+
+                <div class="card-body">
+                    <h3 data-i18n="ta_dsai_name">Teaching Assistant — DSAI</h3>
+                    <div class="meta" data-i18n="ta_dsai_location">Data Science and Artificial Intelligence Education
+                        Department, Tokyo Institute of Technology</div>
+                    <div class="meta" data-i18n="ta_dsai_time">December 2022 – January 2024</div>
+                    <div class="summary" data-i18n="ta_dsai_summary">Teaching assistant for courses on statistical
+                        methods and data science, supporting lectures on multivariable analysis, dimensionality
+                        reduction, and resampling techniques.</div>
+
+                    <div class="links" data-i18n-attr="ta_dsai_links"></div>
+                </div>
+            </article>
+
+            <!-- ATLAS -->
+            <article class="cv-card">
+                <div class="card-image" style="background-image: url('/assets/atlas.jpg');" role="img" aria-label=""
+                    data-i18n-attr="atlas_image_alt"></div>
+
+                <div class="card-body">
+                    <h3 data-i18n="atlas_name">ATLAS Collaboration — Qualification Task</h3>
+                    <div class="meta" data-i18n="atlas_location">Institute of Science Tokyo</div>
+                    <div class="meta" data-i18n="atlas_time">November 2021 – May 2023</div>
+                    <div class="summary" data-i18n="atlas_summary">Qualification task within the ATLAS collaboration
+                        focused on detector alignment, contributing to production-level reconstruction software under
+                        strict code review and validation procedures.</div>
+
+                    <div class="links" data-i18n-attr="atlas_links"></div>
+                </div>
+            </article>
+
+            <!-- UNAM Internship -->
+            <article class="cv-card">
+                <div class="card-image" style="background-image: url('/assets/femtoscopy.jpg');" role="img"
+                    aria-label="" data-i18n-attr="unam_intern_image_alt"></div>
+
+                <div class="card-body">
+                    <h3 data-i18n="unam_intern_name">Research Internship — Instituto de Ciencias Nucleares (UNAM)</h3>
+                    <div class="meta" data-i18n="unam_intern_location">UNAM</div>
+                    <div class="meta" data-i18n="unam_intern_time">December 2017 – July 2018</div>
+                    <div class="summary" data-i18n="unam_intern_summary">Research internship using Monte Carlo
+                        simulations to study particle correlation effects in high-energy collisions, with results
+                        presented at a national ALICE collaboration conference.</div>
+
+                    <div class="links" data-i18n-attr="unam_intern_links"></div>
+                </div>
+            </article>
+
+            <!-- UNAM RA -->
+            <article class="cv-card">
+                <div class="card-image" style="background-image: url('/assets/zscan.jpg');" role="img" aria-label=""
+                    data-i18n-attr="unam_ra_image_alt"></div>
+
+                <div class="card-body">
+                    <h3 data-i18n="unam_ra_name">Research Assistant — Physics Institute (UNAM)</h3>
+                    <div class="meta" data-i18n="unam_ra_location">UNAM</div>
+                    <div class="meta" data-i18n="unam_ra_time">August 2015 – August 2016</div>
+                    <div class="summary" data-i18n="unam_ra_summary">Early research experience in experimental optics,
+                        involving data acquisition, laser alignment, and mathematical modeling of beam profiles in
+                        nonlinear optical measurements.</div>
+                    <div class="links" data-i18n-attr="unam_ra_links"></div>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <script>
+        // Translations updated to map card fields (values may include HTML for links).
+        registerTranslations({
+            en: {
+                label_tags: "Tags",
+                label_language: "Language",
+                label_topic: "Topic",
+                label_year: "Year",
+                label_skills: "Skills",
+
+                skill_Physics: "Physics",
+                skill_ATLAS: "ATLAS",
+                skill_Machine_Learning: "Machine Learning",
+                skill_Computer_Vision: "Computer Vision",
+                skill_Optics: "Optics",
+                skill_Big_Data: "Big Data",
+                skill_Artificial_Intelligence: "Artificial Intelligence",
+                skill_Transformers: "Transformers",
+                skill_Semiconductor_detectors: "Semiconductor detectors",
+                education_title: "Education",
+                employment_title: "Employment",
+
+                phd_name: "Doctor of Philosophy (Ph.D.) in Physics",
+                phd_location: "Institute of Science Tokyo (formerly Tokyo Institute of Technology)",
+                phd_time: "September 2022 – expected June 2026",
+                phd_summary: "Ph.D. research in experimental particle physics focused on statistical modeling and machine learning methods for background estimation in diphoton analyses within the ATLAS collaboration.",
+                phd_image_alt: "PhD research image",
+                phd_links: '<a href="/projects/phd-thesis" target="_blank">Thesis & projects</a><a href="/publications" target="_blank">Publications</a>',
+
+                master_name: "Master’s Degree in Physics",
+                master_location: "Tokyo Institute of Technology",
+                master_time: "September 2020 – September 2022",
+                master_summary: "Master’s research on quality control for semiconductor pixel detectors, including image processing pipelines for visual inspection, image stitching, and robust feature extraction under production constraints.",
+                master_image_alt: "Master studies image",
+                master_links: '<a href="/projects/master-project" target="_blank">Project</a>',
+
+                bachelor_name: "Bachelor’s Degree in Physics",
+                bachelor_location: "Universidad Nacional Autónoma de México (UNAM)",
+                bachelor_time: "August 2014 – October 2019",
+                bachelor_summary: "Undergraduate studies in physics with research experience in Monte Carlo simulations and data analysis, including machine learning–based classification and feature analysis using ROOT TMVA.",
+                bachelor_image_alt: "Undergraduate image",
+                bachelor_links: '<a href="/projects/undergrad" target="_blank">Undergrad projects</a>',
+
+                ta_dsai_name: "Teaching Assistant — DSAI",
+                ta_dsai_location: "Data Science and Artificial Intelligence Education Department, Tokyo Institute of Technology",
+                ta_dsai_time: "December 2022 – January 2024",
+                ta_dsai_summary: "Teaching assistant for courses on statistical methods and data science, supporting lectures on multivariable analysis, dimensionality reduction, and resampling techniques.",
+                ta_dsai_image_alt: "Teaching assistant image",
+                ta_dsai_links: '<a href="/teaching/dsai-labs" target="_blank">Labs</a><a href="/teaching/materials" target="_blank">Materials</a>',
+
+                total_name: "Educational Support Staff — ToTAL",
+                total_location: "Tokyo Tech Academy for Leadership, Tokyo Institute of Technology",
+                total_time: "April 2023 – present",
+                total_summary: "Educational support for leadership development programs, including workshop facilitation, technical coordination, and support for interactive and discussion-based sessions.",
+                total_image_alt: "ToTAL program image",
+                total_links: '<a href="/total/workshops" target="_blank">Workshops</a>',
+
+                atlas_name: "ATLAS Collaboration — Qualification Task",
+                atlas_location: "Institute of Science Tokyo",
+                atlas_time: "November 2021 – May 2023",
+                atlas_summary: "Qualification task within the ATLAS collaboration focused on detector alignment, contributing to production-level reconstruction software under strict code review and validation procedures.",
+                atlas_image_alt: "ATLAS experiment image",
+                atlas_links: '<a href="/projects/atlas" target="_blank">ATLAS tasks & code</a>',
+
+                unam_intern_name: "Research Internship — Instituto de Ciencias Nucleares (UNAM)",
+                unam_intern_location: "UNAM",
+                unam_intern_time: "December 2017 – July 2018",
+                unam_intern_summary: "Research internship using Monte Carlo simulations to study particle correlation effects in high-energy collisions, with results presented at a national ALICE collaboration conference.",
+                unam_intern_image_alt: "UNAM internship image",
+                unam_intern_links: '<a href="/projects/unam-intern" target="_blank">Intern projects</a>',
+
+                unam_ra_name: "Research Assistant — Physics Institute (UNAM)",
+                unam_ra_location: "UNAM",
+                unam_ra_time: "August 2015 – August 2016",
+                unam_ra_summary: "Early research experience in experimental optics, involving data acquisition, laser alignment, and mathematical modeling of beam profiles in nonlinear optical measurements.",
+                unam_ra_image_alt: "UNAM research assistant image",
+                unam_ra_links: '<a href="/projects/unam-ra" target="_blank">Assistant projects</a>'
+            },
+
+            es: {
+                label_tags: "Etiquetas",
+                label_language: "Idioma",
+                label_topic: "Tema",
+                label_year: "Año",
+                label_skills: "Habilidades",
+
+                skill_Physics: "Física",
+                skill_ATLAS: "ATLAS",
+                skill_Machine_Learning: "Aprendizaje automático",
+                skill_Computer_Vision: "Visión por computadora",
+                skill_Optics: "Óptica",
+                skill_Big_Data: "Big Data",
+                skill_Artificial_Intelligence: "Inteligencia Artificial",
+                skill_Transformers: "Transformers",
+                skill_Semiconductor_detectors: "Detectores de semiconductores",
+                education_title: "Formación académica",
+                employment_title: "Experiencia laboral",
+
+                phd_name: "Doctorado en Física",
+                phd_location: "Institute of Science Tokyo (antes Tokyo Institute of Technology)",
+                phd_time: "septiembre de 2022 – finalización prevista junio de 2026",
+                phd_summary: "Investigación doctoral en física de partículas experimental centrada en modelado estadístico y métodos de aprendizaje automático para la estimación del fondo en análisis de diphotones dentro de la colaboración ATLAS.",
+                phd_image_alt: "Imagen doctorado",
+                phd_links: '<a href="/es/projects/phd-thesis" target="_blank">Tesis y proyectos</a><a href="/es/publications" target="_blank">Publicaciones</a>',
+
+                master_name: "Maestría en Física",
+                master_location: "Tokyo Institute of Technology",
+                master_time: "septiembre 2020 – septiembre 2022",
+                master_summary: "Investigación de maestría sobre control de calidad de detectores de píxeles semiconductores, incluyendo canalizaciones de procesamiento de imágenes para inspección visual, montaje de imágenes y extracción robusta de características bajo restricciones de producción.",
+                master_image_alt: "Imagen maestría",
+                master_links: '<a href="/es/projects/master-project" target="_blank">Proyecto</a>',
+
+                bachelor_name: "Licenciatura en Física",
+                bachelor_location: "Universidad Nacional Autónoma de México (UNAM)",
+                bachelor_time: "agosto 2014 – octubre 2019",
+                bachelor_summary: "Estudios de licenciatura en física con experiencia en investigación en simulaciones Monte Carlo y análisis de datos, incluyendo clasificación basada en aprendizaje automático y análisis de características usando ROOT TMVA.",
+                bachelor_image_alt: "Imagen licenciatura",
+                bachelor_links: '<a href="/es/projects/undergrad" target="_blank">Proyectos</a>',
+
+                ta_dsai_name: "Asistente de docencia — DSAI",
+                ta_dsai_location: "Departamento DSAI, Tokyo Institute of Technology",
+                ta_dsai_time: "diciembre 2022 – enero 2024",
+                ta_dsai_summary: "Asistente de docencia en cursos sobre métodos estadísticos y ciencia de datos, apoyando conferencias sobre análisis multivariable, reducción de dimensionalidad y técnicas de remuestreo.",
+                ta_dsai_image_alt: "Imagen asistente",
+                ta_dsai_links: '<a href="/es/teaching/dsai-labs" target="_blank">Laboratorios</a>',
+
+                total_name: "Personal de apoyo educativo — ToTAL",
+                total_location: "Tokyo Tech Academy for Leadership, Tokyo Institute of Technology",
+                total_time: "abril 2023 – presente",
+                total_summary: "Apoyo educativo para programas de desarrollo de liderazgo, incluyendo facilitación de talleres, coordinación técnica y soporte para sesiones interactivas y basadas en discusión.",
+                total_image_alt: "Imagen ToTAL",
+                total_links: '<a href="/es/total/workshops" target="_blank">Talleres</a>',
+
+                atlas_name: "Colaboración ATLAS — Qualification Task",
+                atlas_location: "Institute of Science Tokyo",
+                atlas_time: "noviembre 2021 – mayo 2023",
+                atlas_summary: "Tarea de calificación en la colaboración ATLAS centrada en la alineación del detector, contribuyendo a software de reconstrucción a nivel de producción bajo estrictos procesos de revisión y validación de código.",
+                atlas_image_alt: "Imagen ATLAS",
+                atlas_links: '<a href="/es/projects/atlas" target="_blank">Proyectos ATLAS</a>',
+
+                unam_intern_name: "Estancia de investigación — Instituto de Ciencias Nucleares (UNAM)",
+                unam_intern_location: "UNAM",
+                unam_intern_time: "diciembre 2017 – julio 2018",
+                unam_intern_summary: "Pasantía de investigación usando simulaciones Monte Carlo para estudiar efectos de correlación de partículas en colisiones de alta energía, con resultados presentados en una conferencia nacional de la colaboración ALICE.",
+                unam_intern_image_alt: "Imagen pasantía UNAM",
+                unam_intern_links: '<a href="/es/projects/unam-intern" target="_blank">Proyectos</a>',
+
+                unam_ra_name: "Asistente de investigación — Instituto de Física (UNAM)",
+                unam_ra_location: "UNAM",
+                unam_ra_time: "agosto 2015 – agosto 2016",
+                unam_ra_summary: "Experiencia de investigación temprana en óptica experimental, implicando adquisición de datos, alineación de láseres y modelado matemático de perfiles de haz en mediciones ópticas no lineales.",
+                unam_ra_image_alt: "Imagen asistente UNAM",
+                unam_ra_links: '<a href="/es/projects/unam-ra" target="_blank">Proyectos</a>'
+            },
+
+            ja: {
+                label_tags: "タグ",
+                label_language: "言語",
+                label_topic: "トピック",
+                label_year: "年",
+                label_skills: "スキル",
+
+                skill_Physics: "物理学",
+                skill_ATLAS: "ATLAS",
+                skill_Machine_Learning: "機械学習",
+                skill_Computer_Vision: "コンピュータビジョン",
+                skill_Optics: "光学",
+                skill_Big_Data: "ビッグデータ",
+                skill_Artificial_Intelligence: "人工知能",
+                skill_Transformers: "トランスフォーマー",
+                skill_Semiconductor_detectors: "半導体検出器",
+                education_title: "学歴",
+                employment_title: "職歴",
+
+                phd_name: "博士（物理学）",
+                phd_location: "東京科学大学（旧 東京工業大学）",
+                phd_time: "2022年9月 – 2026年6月（予定）",
+                phd_summary: "ATLAS コラボレーション内のディフォトン解析における背景推定のための統計モデリングと機械学習手法に焦点を当てた実験的粒子物理学の博士研究。",
+                phd_image_alt: "博士研究の画像",
+                phd_links: '<a href="/ja/projects/phd-thesis" target="_blank">論文・プロジェクト</a>',
+
+                master_name: "修士（物理学）",
+                master_location: "東京工業大学",
+                master_time: "2020年9月 – 2022年9月",
+                master_summary: "半導体ピクセル検出器の品質管理に関する修士研究。目視検査のための画像処理パイプライン、画像スティッチング、生産制約下での堅牢な特徴抽出を含む。",
+                master_image_alt: "修士の画像",
+                master_links: '<a href="/ja/projects/master-project" target="_blank">プロジェクト</a>',
+
+                bachelor_name: "学士（物理学）",
+                bachelor_location: "メキシコ国立自治大学（UNAM）",
+                bachelor_time: "2014年8月 – 2019年10月",
+                bachelor_summary: "モンテカルロシミュレーションとデータ解析の研究経験を伴う物理学の学士課程。ROOT TMVA を用いた機械学習ベースの分類と特徴解析を含む。",
+                bachelor_image_alt: "学士の画像",
+                bachelor_links: '<a href="/ja/projects/undergrad" target="_blank">プロジェクト</a>',
+
+                ta_dsai_name: "ティーチング・アシスタント — DSAI",
+                ta_dsai_location: "DSAI、東京工業大学",
+                ta_dsai_time: "2022年12月 – 2024年1月",
+                ta_dsai_summary: "統計手法とデータサイエンスのコースのティーチングアシスタントとして、重回帰解析、次元削減、リサンプリング手法の講義支援を行った。",
+                ta_dsai_image_alt: "TAの画像",
+                ta_dsai_links: '<a href="/ja/teaching/dsai-labs" target="_blank">実習資料</a>',
+
+                total_name: "教育支援 — ToTAL",
+                total_location: "Tokyo Tech Academy for Leadership",
+                total_time: "2023年4月 – 現在",
+                total_summary: "リーダーシップ開発プログラムの教育支援。ワークショップのファシリテーション、技術的調整、インタラクティブかつ討論ベースのセッションの支援を含む。",
+                total_image_alt: "ToTALの画像",
+                total_links: '<a href="/ja/total/workshops" target="_blank">ワークショップ</a>',
+
+                atlas_name: "ATLAS コラボレーション — Qualification Task",
+                atlas_location: "東京科学大学",
+                atlas_time: "2021年11月 – 2023年5月",
+                atlas_summary: "ATLAS コラボレーションでの資格タスク。検出器のアラインメントに焦点を当て、厳格なコードレビューと検証手順の下で製作用リコンストラクションソフトウェアに貢献。",
+                atlas_image_alt: "ATLASの画像",
+                atlas_links: '<a href="/ja/projects/atlas" target="_blank">ATLAS プロジェクト</a>',
+
+                unam_intern_name: "研究インターン — UNAM 原子核科学研究所",
+                unam_intern_location: "UNAM",
+                unam_intern_time: "2017年12月 – 2018年7月",
+                unam_intern_summary: "モンテカルロシミュレーションを用いて高エネルギー衝突における粒子相関効果を研究した研究インターンシップ。成果は国内のALICE会議で発表。",
+                unam_intern_image_alt: "UNAM インターンの画像",
+                unam_intern_links: '<a href="/ja/projects/unam-intern" target="_blank">プロジェクト</a>',
+
+                unam_ra_name: "研究補助 — UNAM 物理学研究所",
+                unam_ra_location: "UNAM",
+                unam_ra_time: "2015年8月 – 2016年8月",
+                unam_ra_summary: "実験光学の初期研究経験。データ取得、レーザー整列、非線形光学測定におけるビームプロファイルの数学的モデリングを含む。",
+                unam_ra_image_alt: "UNAM RA の画像",
+                unam_ra_links: '<a href="/ja/projects/unam-ra" target="_blank">プロジェクト</a>'
+            },
+
+            ru: {
+                label_tags: "Теги",
+                label_language: "Язык",
+                label_topic: "Тема",
+                label_year: "Год",
+                label_skills: "Навыки",
+
+                skill_Physics: "Физика",
+                skill_ATLAS: "ATLAS",
+                skill_Machine_Learning: "Машинное обучение",
+                skill_Computer_Vision: "Компьютерное зрение",
+                skill_Optics: "Оптика",
+                skill_Big_Data: "Big Data",
+                skill_Artificial_Intelligence: "Искусственный интеллект",
+                skill_Transformers: "Transformers",
+                skill_Semiconductor_detectors: "Полупроводниковые детекторы",
+                education_title: "Образование",
+                employment_title: "Опыт работы",
+
+                phd_name: "Докторантура (физика)",
+                phd_location: "Institute of Science Tokyo (ранее Tokyo Institute of Technology)",
+                phd_time: "сентябрь 2022 – июнь 2026 (ожидается)",
+                phd_summary: "Докторантское исследование по экспериментальной физике частиц, сосредоточенное на статистическом моделировании и методах машинного обучения для оценки фона в анализах дипфотонных событий в коллаборации ATLAS.",
+                phd_image_alt: "Изображение докторантуры",
+                phd_links: '<a href="/ru/projects/phd-thesis" target="_blank">Диссертация и проекты</a>',
+
+                master_name: "Магистратура (физика)",
+                master_location: "Tokyo Institute of Technology",
+                master_time: "сентябрь 2020 – сентябрь 2022",
+                master_summary: "Магистерское исследование по контролю качества полупроводниковых пиксельных детекторов, включая конвейеры обработки изображений для визуального контроля, сшивание изображений и устойчивое выделение признаков в условиях производства.",
+                master_image_alt: "Изображение магистратуры",
+                master_links: '<a href="/ru/projects/master-project" target="_blank">Проект</a>',
+
+                bachelor_name: "Бакалавриат (физика)",
+                bachelor_location: "UNAM",
+                bachelor_time: "август 2014 – октябрь 2019",
+                bachelor_summary: "Бакалаврские исследования по физике с опытом в моделировании методом Монте-Карло и анализе данных, включая классификацию на основе машинного обучения и анализ признаков с использованием ROOT TMVA.",
+                bachelor_image_alt: "Изображение бакалавра",
+                bachelor_links: '<a href="/ru/projects/undergrad" target="_blank">Проекты</a>',
+
+                ta_dsai_name: "Ассистент преподавателя — DSAI",
+                ta_dsai_location: "DSAI, Tokyo Institute of Technology",
+                ta_dsai_time: "декабрь 2022 – январь 2024",
+                ta_dsai_summary: "Ассистент преподавателя на курсах по статистическим методам и науке о данных, поддержка лекций по многомерному анализу, понижающему измерения пространство и методам повторной выборки.",
+                ta_dsai_image_alt: "Изображение TA",
+                ta_dsai_links: '<a href="/ru/teaching/dsai-labs" target="_blank">Лаборатории</a>',
+
+                total_name: "Образовательная поддержка — ToTAL",
+                total_location: "Tokyo Tech Academy for Leadership",
+                total_time: "апрель 2023 – настоящее время",
+                total_summary: "Образовательная поддержка программ развития лидерства, включая проведение воркшопов, техническую координацию и поддержку интерактивных и дискуссионных сессий.",
+                total_image_alt: "Изображение ToTAL",
+                total_links: '<a href="/ru/total/workshops" target="_blank">Воркшопы</a>',
+
+                atlas_name: "Коллаборация ATLAS — Qualification Task",
+                atlas_location: "Institute of Science Tokyo",
+                atlas_time: "ноябрь 2021 – май 2023",
+                atlas_summary: "Квалификационная задача в коллаборации ATLAS, фокус на выравнивании детектора, вклад в производственное программное обеспечение реконструкции при строгих процедурах ревью и валидации кода.",
+                atlas_image_alt: "Изображение ATLAS",
+                atlas_links: '<a href="/ru/projects/atlas" target="_blank">Проекты ATLAS</a>',
+
+                unam_intern_name: "Стажировка — Instituto de Ciencias Nucleares (UNAM)",
+                unam_intern_location: "UNAM",
+                unam_intern_time: "декабрь 2017 – июль 2018",
+                unam_intern_summary: "Стажировка по исследованию с использованием моделирования Монте-Карло для изучения эффектов корреляции частиц в высокоэнергетических столкновениях; результаты представлены на национальной конференции коллаборации ALICE.",
+                unam_intern_image_alt: "Изображение стажировки UNAM",
+                unam_intern_links: '<a href="/ru/projects/unam-intern" target="_blank">Проекты</a>',
+
+                unam_ra_name: "Научный ассистент — Институт физики (UNAM)",
+                unam_ra_location: "UNAM",
+                unam_ra_time: "август 2015 – август 2016",
+                unam_ra_summary: "Ранний опыт исследований в экспериментальной оптике: сбор данных, выравнивание лазера и математическое моделирование профилей пучка в нелинейных оптических измерениях.",
+                unam_ra_image_alt: "Изображение RA UNAM",
+                unam_ra_links: '<a href="/ru/projects/unam-ra" target="_blank">Проекты</a>'
+            },
+
+            fr: {
+                label_tags: "Étiquettes",
+                label_language: "Langue",
+                label_topic: "Sujet",
+                label_year: "Année",
+                label_skills: "Compétences",
+
+                skill_Physics: "Physique",
+                skill_ATLAS: "ATLAS",
+                skill_Machine_Learning: "Apprentissage automatique",
+                skill_Computer_Vision: "Vision par ordinateur",
+                skill_Optics: "Optique",
+                skill_Big_Data: "Big Data",
+                skill_Artificial_Intelligence: "Intelligence artificielle",
+                skill_Transformers: "Transformers",
+                skill_Semiconductor_detectors: "Détecteurs à semi-conducteurs",
+                education_title: "Formation",
+                employment_title: "Expérience professionnelle",
+
+                phd_name: "Doctorat en physique",
+                phd_location: "Institute of Science Tokyo (anciennement Tokyo Institute of Technology)",
+                phd_time: "septembre 2022 – juin 2026 (prévu)",
+                phd_summary: "Recherche de doctorat en physique des particules expérimentale axée sur la modélisation statistique et les méthodes d'apprentissage automatique pour l'estimation du bruit dans les analyses diphoton au sein de la collaboration ATLAS.",
+                phd_image_alt: "Image doctorat",
+                phd_links: '<a href="/fr/projects/phd-thesis" target="_blank">Thèse & projets</a>',
+
+                master_name: "Master en physique",
+                master_location: "Tokyo Institute of Technology",
+                master_time: "septembre 2020 – septembre 2022",
+                master_summary: "Recherche de master sur le contrôle qualité des détecteurs à pixels semi-conducteurs, incluant des pipelines de traitement d'images pour l'inspection visuelle, le montage d'images et l'extraction robuste de caractéristiques sous contraintes de production.",
+                master_image_alt: "Image master",
+                master_links: '<a href="/fr/projects/master-project" target="_blank">Projet</a>',
+
+                bachelor_name: "Licence en physique",
+                bachelor_location: "Universidad Nacional Autónoma de México (UNAM)",
+                bachelor_time: "août 2014 – octobre 2019",
+                bachelor_summary: "Études de licence en physique avec expérience de recherche en simulations Monte Carlo et analyse de données, incluant la classification basée sur l'apprentissage automatique et l'analyse des caractéristiques avec ROOT TMVA.",
+                bachelor_image_alt: "Image licence",
+                bachelor_links: '<a href="/fr/projects/undergrad" target="_blank">Projets</a>',
+
+                ta_dsai_name: "Assistant d’enseignement — DSAI",
+                ta_dsai_location: "DSAI, Tokyo Institute of Technology",
+                ta_dsai_time: "décembre 2022 – janvier 2024",
+                ta_dsai_summary: "Assistant d'enseignement pour des cours sur les méthodes statistiques et la science des données, soutenant les cours sur l'analyse multivariée, la réduction de dimension et les techniques de remaniement d'échantillons.",
+                ta_dsai_image_alt: "Image TA",
+                ta_dsai_links: '<a href="/fr/teaching/dsai-labs" target="_blank">TP</a>',
+
+                total_name: "Support pédagogique — ToTAL",
+                total_location: "Tokyo Tech Academy for Leadership",
+                total_time: "avril 2023 – présent",
+                total_summary: "Support éducatif pour les programmes de développement du leadership, y compris facilitation d'ateliers, coordination technique et soutien pour des sessions interactives et basées sur la discussion.",
+                total_image_alt: "Image ToTAL",
+                total_links: '<a href="/fr/total/workshops" target="_blank">Ateliers</a>',
+
+                atlas_name: "Collaboration ATLAS — Qualification Task",
+                atlas_location: "Institute of Science Tokyo",
+                atlas_time: "novembre 2021 – mai 2023",
+                atlas_summary: "Tâche de qualification au sein de la collaboration ATLAS axée sur l'alignement du détecteur, contribuant au logiciel de reconstruction en production sous des procédures strictes de revue et de validation du code.",
+                atlas_image_alt: "Image ATLAS",
+                atlas_links: '<a href="/fr/projects/atlas" target="_blank">Projets ATLAS</a>',
+
+                unam_intern_name: "Stage de recherche — Instituto de Ciencias Nucleares (UNAM)",
+                unam_intern_location: "UNAM",
+                unam_intern_time: "décembre 2017 – juillet 2018",
+                unam_intern_summary: "Stage de recherche utilisant des simulations Monte Carlo pour étudier les effets de corrélation entre particules dans les collisions à haute énergie, avec des résultats présentés lors d'une conférence nationale de la collaboration ALICE.",
+                unam_intern_image_alt: "Image stage UNAM",
+                unam_intern_links: '<a href="/fr/projects/unam-intern" target="_blank">Projets</a>',
+
+                unam_ra_name: "Assistant de recherche — Institut de physique (UNAM)",
+                unam_ra_location: "UNAM",
+                unam_ra_time: "août 2015 – août 2016",
+                unam_ra_summary: "Expérience de recherche initiale en optique expérimentale impliquant l'acquisition de données, l'alignement de lasers et la modélisation mathématique des profils de faisceau dans des mesures optiques non linéaires.",
+                unam_ra_image_alt: "Image RA UNAM",
+                unam_ra_links: '<a href="/fr/projects/unam-ra" target="_blank">Projets</a>'
+            }
+        });
+
+        // If registerTranslations doesn't inject HTML into elements with `data-i18n-attr`,
+        // fallback: simple DOM insertion for link and aria-label fields.
+        (function applyAttrTranslations() {
+            const attrMappings = [
+                ['phd_links', 'phd_links'], ['master_links', 'master_links'], ['bachelor_links', 'bachelor_links'],
+                ['ta_dsai_links', 'ta_dsai_links'], ['total_links', 'total_links'], ['atlas_links', 'atlas_links'],
+                ['unam_intern_links', 'unam_intern_links'], ['unam_ra_links', 'unam_ra_links']
+            ];
+            // try to read translations via global translation function if available
+            try {
+                const get = window.getTranslation || (k => null);
+                attrMappings.forEach(([elKey, transKey]) => {
+                    const el = document.querySelector(`[data-i18n-attr="${elKey}"]`);
+                    if (!el) return;
+                    const t = get(transKey) || (window.translations && window.translations[transKey]) || null;
+                    if (t) el.innerHTML = t;
+                });
+
+                // aria-labels
+                ['phd_image_alt', 'master_image_alt', 'bachelor_image_alt', 'ta_dsai_image_alt', 'total_image_alt', 'atlas_image_alt', 'unam_intern_image_alt', 'unam_ra_image_alt'].forEach(key => {
+                    const els = document.querySelectorAll(`[data-i18n-attr="${key}"]`);
+                    els.forEach(e => {
+                        const t = get(key) || (window.translations && window.translations[key]) || null;
+                        if (t) e.setAttribute('aria-label', t);
+                    });
+                });
+            } catch (e) { /* silent fallback */ }
+        })();
+
+        // Localize any skill lists (elements with class 'skill-list' or attribute 'data-skill-list')
+        (function localizeSkillLists() {
+            try {
+                const lang = document.getElementById('languageSelect')?.value || 'en';
+                const tx = (window.translations && window.translations[lang]) || {};
+                const enTx = (window.translations && window.translations['en']) || {};
+                document.querySelectorAll('.skill-list, [data-skill-list]').forEach(el => {
+                    const raw = (el.textContent || '').trim();
+                    if (!raw) return;
+                    const parts = raw.split(',').map(s => s.trim()).filter(Boolean);
+                    if (!parts.length) return;
+                    const localized = parts.map(p => {
+                        const key = 'skill_' + p.replace(/\s+/g, '_').replace(/[^\w_]/g, '');
+                        return tx[key] || enTx[key] || p;
+                    }).join(', ');
+                    el.textContent = localized;
+                });
+            } catch (e) { /* ignore */ }
+        })();
+    </script>
+
 </main>

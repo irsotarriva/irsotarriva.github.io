@@ -1,0 +1,211 @@
+[
+    {
+        "id": 1,
+        "key": "Physics",
+        "label": {
+            "en": "Physics",
+            "es": "Física",
+            "ja": "物理学",
+            "ru": "Физика",
+            "fr": "Physique"
+        }
+    },
+    {
+        "id": 2,
+        "key": "ATLAS",
+        "label": {
+            "en": "ATLAS",
+            "es": "ATLAS",
+            "ja": "ATLAS",
+            "ru": "ATLAS",
+            "fr": "ATLAS"
+        }
+    },
+    {
+        "id": 3,
+        "key": "Machine Learning",
+        "label": {
+            "en": "Machine Learning",
+            "es": "Aprendizaje automático",
+            "ja": "機械学習",
+            "ru": "Машинное обучение",
+            "fr": "Apprentissage automatique"
+        }
+    },
+    {
+        "id": 4,
+        "key": "Computer Vision",
+        "label": {
+            "en": "Computer Vision",
+            "es": "Visión por computadora",
+            "ja": "コンピュータビジョン",
+            "ru": "Компьютерное зрение",
+            "fr": "Vision par ordinateur"
+        }
+    },
+    {
+        "id": 5,
+        "key": "Optics",
+        "label": {
+            "en": "Optics",
+            "es": "Óptica",
+            "ja": "光学",
+            "ru": "Оптика",
+            "fr": "Optique"
+        }
+    },
+    {
+        "id": 6,
+        "key": "Big Data",
+        "label": {
+            "en": "Big Data",
+            "es": "Big Data",
+            "ja": "ビッグデータ",
+            "ru": "Big Data",
+            "fr": "Big Data"
+        }
+    },
+    {
+        "id": 7,
+        "key": "Artificial Intelligence",
+        "label": {
+            "en": "Artificial Intelligence",
+            "es": "Inteligencia Artificial",
+            "ja": "人工知能",
+            "ru": "Искусственный интеллект",
+            "fr": "Intelligence artificielle"
+        }
+    },
+    {
+        "id": 8,
+        "key": "Transformers",
+        "label": {
+            "en": "Transformers",
+            "es": "Transformers",
+            "ja": "トランスフォーマー",
+            "ru": "Transformers",
+            "fr": "Transformers"
+        }
+    },
+    {
+        "id": 9,
+        "key": "Semiconductor detectors",
+        "label": {
+            "en": "Semiconductor detectors",
+            "es": "Detectores de semiconductores",
+            "ja": "半導体検出器",
+            "ru": "Полупроводниковые детекторы",
+            "fr": "Détecteurs à semi-conducteurs"
+        }
+    },
+    {
+        "id": 10,
+        "key": "Statistics",
+        "label": {
+            "en": "Statistics",
+            "es": "Estadística",
+            "ja": "統計",
+            "ru": "Статистика",
+            "fr": "Statistiques"
+        }
+    },
+    {
+        "id": 11,
+        "key": "Optimal Transport",
+        "label": {
+            "en": "Optimal Transport",
+            "es": "Transporte óptimo",
+            "ja": "最適輸送",
+            "ru": "Оптимальный транспорт",
+            "fr": "Transport optimal"
+        }
+    },
+    {
+        "id": 12,
+        "key": "GNN",
+        "label": {
+            "en": "GNN",
+            "es": "GNN",
+            "ja": "GNN",
+            "ru": "GNN",
+            "fr": "GNN"
+        }
+    },
+    {
+        "id": 13,
+        "key": "Quality Control",
+        "label": {
+            "en": "Quality Control",
+            "es": "Control de calidad",
+            "ja": "品質管理",
+            "ru": "Контроль качества",
+            "fr": "Contrôle qualité"
+        }
+    },
+    {
+        "id": 14,
+        "key": "Image Processing",
+        "label": {
+            "en": "Image Processing",
+            "es": "Procesamiento de imágenes",
+            "ja": "画像処理",
+            "ru": "Обработка изображений",
+            "fr": "Traitement d'images"
+        }
+    },
+    {
+        "id": 15,
+        "key": "Monte Carlo",
+        "label": {
+            "en": "Monte Carlo",
+            "es": "Monte Carlo",
+            "ja": "モンテカルロ",
+            "ru": "Монте-Карло",
+            "fr": "Monte Carlo"
+        }
+    },
+    {
+        "id": 16,
+        "key": "ALICE",
+        "label": {
+            "en": "ALICE",
+            "es": "ALICE",
+            "ja": "ALICE",
+            "ru": "ALICE",
+            "fr": "ALICE"
+        }
+    },
+    {
+        "id": 17,
+        "key": "LLM",
+        "label": {
+            "en": "LLM",
+            "es": "LLM",
+            "ja": "LLM",
+            "ru": "LLM",
+            "fr": "LLM"
+        }
+    },
+    {
+        "id": 18,
+        "key": "RAG",
+        "label": {
+            "en": "RAG",
+            "es": "RAG",
+            "ja": "RAG",
+            "ru": "RAG",
+            "fr": "RAG"
+        }
+    },
+    {
+        "id": 19,
+        "key": "Recommendation Systems",
+        "label": {
+            "en": "Recommendation Systems",
+            "es": "Sistemas de recomendación",
+            "ja": "レコメンデーションシステム",
+            "ru": "Системы рекомендаций",
+            "fr": "Systèmes de recommandation"
+        }
+    }
+]

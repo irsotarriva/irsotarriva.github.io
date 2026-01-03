@@ -1,30 +1,473 @@
 <main>
-    <h1 style="font-size: 2rem; margin: 0; color: #333;" data-i18n="name">Isai Roberto Sotarriva Alvarez</h1>
-    <p style="font-size: 1.2rem; margin: 5px 0; color: #555;" data-i18n="job_title">Physics Ph.D. | Machine Learning Engineer | Expertise in Statistical Analysis & Data Science</p>
-    <div class="QuickActions" style="display: flex; gap: 16px; margin-top: 10px;">
-        <!-- Research -->
-        <a href="https://scholar.google.com/citations?user=cljeSm4AAAAJ&hl=en" target="_blank" title="Google Scholar" style="text-decoration: none;">
-            <img src="assets/google_scholar_icon.png" alt="Google Scholar" style="height: 32px;">
-        </a>
-        <a href="https://orcid.org/0009-0001-8347-0803" target="_blank" title="ORCID" style="text-decoration: none;">
-            <img src="assets/orcid_icon.svg" alt="ORCID" style="height: 32px;">
-        </a>
-        <!-- Code -->
-        <a href="https://github.com/irsotarriva" target="_blank" title="GitHub" style="text-decoration: none;">
-            <img src="assets/github_icon.svg" alt="GitHub" style="height: 32px;">
-        </a>
-        <a href="https://www.kaggle.com/irsotarriva" target="_blank" title="Kaggle" style="text-decoration: none;">
-            <img src="assets/kaggle_icon.png" alt="Kaggle" style="height: 32px;">
-        </a>
-        <!-- General Info -->
-        <a href="https://www.linkedin.com/in/irsotarriva/" target="_blank" title="LinkedIn" style="text-decoration: none;">
-            <img src="assets/linkedin_icon.png" alt="LinkedIn" style="height: 32px;">
-        </a>
-        <a href="mailto:irsotarriva@gmail.com" title="Email" style="text-decoration: none;">
-            <img src="assets/mail_icon.svg" alt="Email" style="height: 32px;">
-        </a>
-        <a href="tel:+818025963157" title="Phone" style="text-decoration: none;">
-            <img src="assets/phone_icon.svg" alt="Phone" style="height: 32px;">
-        </a>
+    <div class="pages-browser">
+        <aside class="filters">
+            <h3 id="filtersHeading">Filters</h3>
+            <div class="filter-group">
+                <label for="searchInput" id="searchLabel">Search</label>
+                <input id="searchInput" type="search" placeholder="Search title or description">
+            </div>
+
+            <div class="filter-group">
+                <label id="typeLabel">Type</label>
+                <div id="typeList" class="checkbox-list"></div>
+            </div>
+
+            <div class="filter-group">
+                <label id="skillsLabel">Skills</label>
+                <div id="skillsList" class="checkbox-list"></div>
+            </div>
+
+            <div class="filter-group">
+                <label id="tagsLabel">Tags</label>
+                <div id="tagsList" class="checkbox-list"></div>
+            </div>
+
+            <div class="filter-group">
+                <label id="languageLabel">Language</label>
+                <div id="languageList" class="checkbox-list"></div>
+            </div>
+
+            <div class="filter-group">
+                <label id="yearLabel">Year</label>
+                <div class="range_container">
+                    <div class="sliders_control">
+                        <span id="fromLabel" class="slider-label">2014</span>
+                        <span id="toLabel" class="slider-label">2026</span>
+                        <input id="fromSlider" type="range" value="2014" min="2014" max="2026" />
+                        <input id="toSlider" type="range" value="2026" min="2014" max="2026" />
+
+                        <!-- Range highlight between handles -->
+                        <div id="rangeHighlight" class="range-selected"></div>
+
+                        <!-- Tick marks + labels -->
+                        <div id="tickMarks" class="ticks"></div>
+                        <div id="tickLabels" class="tick-labels"></div>
+
+                        <!-- Built-in ticks for browsers that support datalist -->
+                        <datalist id="yearTicks"></datalist>
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-top:10px;">
+                <button id="clearFilters">Clear</button>
+            </div>
+        </aside>
+
+        <section class="results">
+            <div id="cardsContainer" class="cards-grid"></div>
+            <div id="noResults" style="display:none;margin-top:1rem;color:#666">No results found</div>
+        </section>
     </div>
+
+    <style>
+        .pages-browser {
+            display: flex;
+            gap: 18px;
+            padding: 18px
+        }
+
+        .pages-browser .filters {
+            width: 280px;
+            border-right: 1px solid #e6e6e6;
+            padding-right: 12px
+        }
+
+        .pages-browser .results {
+            flex: 1
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 16px
+        }
+
+        .card {
+            border: 1px solid #e6e6e6;
+            padding: 12px;
+            border-radius: 8px;
+            background: #fff;
+            display: flex;
+            flex-direction: column;
+            position: relative
+        }
+
+        .card img {
+            width: 100%;
+            height: 140px;
+            object-fit: cover;
+            border-radius: 6px
+        }
+
+        .checkbox-list {
+            max-height: 220px;
+            overflow: auto;
+            padding: 6px;
+            border: 1px solid #f0f0f0;
+            border-radius: 6px;
+            background: #fbfbfb
+        }
+
+        .filter-group {
+            margin: 10px 0
+        }
+
+        .tags {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+            margin-top: 8px
+        }
+
+        .tag {
+            background: #f1f1f1;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.85rem
+        }
+
+        .card .meta {
+            margin-top: 8px;
+            font-size: 0.9rem;
+            color: #555
+        }
+
+        .card h3 {
+            margin: 8px 0 4px 0
+        }
+
+        .year-range input[type=range] {
+            -webkit-appearance: none;
+            appearance: none;
+            height: 6px;
+            background: transparent;
+            border-radius: 6px;
+            outline: none;
+            margin: 0;
+        }
+
+        .year-range input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: #fff;
+            border: 2px solid #666;
+            box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.04);
+        }
+
+        .year-range input[type=range]::-moz-range-thumb {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: #fff;
+            border: 2px solid #666;
+        }
+
+        .year-range input.hover::-webkit-slider-thumb {
+            border-color: #007bff;
+            box-shadow: 0 0 0 6px rgba(0, 123, 255, 0.12);
+        }
+
+        .year-range input.hover::-moz-range-thumb {
+            border-color: #007bff;
+            box-shadow: 0 0 0 6px rgba(0, 123, 255, 0.12);
+        }
+
+        /* legacy yearMin/yearMax styles removed */
+
+        .range-selected {
+            position: absolute;
+            top: 8px;
+            /* align with track */
+            left: 0;
+            height: 2px;
+            /* match track thickness */
+            border-radius: 6px;
+            background: #2D6CDF;
+            /* blue highlight */
+            pointer-events: none;
+            z-index: 2;
+            width: 0%;
+            transition: left 0.08s linear, width 0.08s linear;
+        }
+
+        .year-range input[type=range]:hover::-webkit-slider-thumb {
+            border-color: #007bff;
+            box-shadow: 0 0 0 6px rgba(0, 123, 255, 0.12);
+        }
+
+        .year-range input[type=range]:hover::-moz-range-thumb {
+            border-color: #007bff;
+            box-shadow: 0 0 0 6px rgba(0, 123, 255, 0.12);
+        }
+
+        /* Dual slider styles */
+        .range_container {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+        }
+
+        .sliders_control {
+            position: relative;
+            min-height: 36px;
+            margin: 6px 0;
+        }
+
+        .slider-label {
+            position: absolute;
+            top: -26px;
+            transform: translateX(-50%);
+            background: #fff;
+            border: 1px solid #e6e6e6;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 12px;
+            color: #333;
+            white-space: nowrap;
+            pointer-events: none;
+        }
+
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            pointer-events: all;
+            width: 18px;
+            height: 18px;
+            background-color: #fff;
+            border-radius: 50%;
+            box-shadow: 0 0 0 1px #C6C6C6;
+            cursor: pointer;
+        }
+
+        input[type=range]::-moz-range-thumb {
+            pointer-events: all;
+            width: 18px;
+            height: 18px;
+            background-color: #fff;
+            border-radius: 50%;
+            box-shadow: 0 0 0 1px #C6C6C6;
+            cursor: pointer;
+        }
+
+        input[type="range"] {
+            -webkit-appearance: none;
+            appearance: none;
+            height: 2px;
+            width: 100%;
+            position: absolute;
+            background-color: #C6C6C6;
+            pointer-events: none;
+            top: 8px;
+        }
+
+        #fromSlider {
+            z-index: 3;
+        }
+
+        #toSlider {
+            z-index: 4;
+        }
+
+        /* Hover tint for thumbs (blue) */
+        input[type=range]:hover::-webkit-slider-thumb {
+            border-color: #007bff;
+            box-shadow: 0 0 0 6px rgba(0, 123, 255, 0.14);
+        }
+
+        input[type=range]:hover::-moz-range-thumb {
+            border-color: #007bff;
+            box-shadow: 0 0 0 6px rgba(0, 123, 255, 0.14);
+        }
+
+        /* Ticks (custom, visible across browsers) */
+        .ticks {
+            position: relative;
+            height: 12px;
+            margin-top: 28px;
+            /* leaves room below the track */
+        }
+
+        .ticks .tick {
+            position: absolute;
+            top: 0;
+            width: 2px;
+            height: 10px;
+            background: #9aa0a6;
+            /* neutral tick color */
+            transform: translateX(-1px);
+            /* center 2px line */
+        }
+
+        /* Tick labels (min, 3 intermediates, max) */
+        .tick-labels {
+            position: relative;
+            height: 18px;
+            margin-top: 2px;
+            font-size: 12px;
+            color: #555;
+        }
+
+        .tick-labels .tick-label {
+            position: absolute;
+            transform: translateX(-50%);
+            white-space: nowrap;
+        }
+
+        /* Type-specific card borders */
+        .card.card-project {
+            border-color: #2D6CDF;
+        }
+
+        .card.card-publication {
+            border-color: #8E44AD;
+        }
+
+        .card.card-presentation {
+            border-color: #E67E22;
+        }
+
+        /* Floating type badge */
+        .type-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            padding: 4px 10px;
+            border-radius: 16px;
+            font-size: 12px;
+            font-weight: 600;
+            color: #fff;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+        }
+
+        .type-badge.type-project {
+            background-color: #2D6CDF;
+        }
+
+        .type-badge.type-publication {
+            background-color: #8E44AD;
+        }
+
+        .type-badge.type-presentation {
+            background-color: #E67E22;
+        }
+    </style>
+
+    <script>
+        // register translations for publications page UI
+        if (typeof registerTranslations === 'function') {
+            registerTranslations({
+                en: {
+                    filters: 'Filters',
+                    search_placeholder: 'Search title or description',
+                    type: 'Type',
+                    skills: 'Skills',
+                    tags: 'Tags',
+                    language: 'Language',
+                    year: 'Year',
+                    clear: 'Clear',
+                    sort: 'Sort',
+                    newest_first: 'Newest first',
+                    oldest_first: 'Oldest first',
+                    label_languages: 'Languages'
+                    , type_project: 'Project'
+                    , type_publication: 'Publication'
+                    , type_presentation: 'Presentation'
+                },
+                es: {
+                    filters: 'Filtros',
+                    search_placeholder: 'Buscar título o descripción',
+                    type: 'Tipo',
+                    skills: 'Habilidades',
+                    tags: 'Etiquetas',
+                    language: 'Idioma',
+                    year: 'Año',
+                    clear: 'Limpiar',
+                    sort: 'Orden',
+                    newest_first: 'Más recientes',
+                    oldest_first: 'Más antiguos',
+                    label_languages: 'Idiomas'
+                    , type_project: 'Proyecto'
+                    , type_publication: 'Publicación'
+                    , type_presentation: 'Presentación'
+                },
+                ja: {
+                    filters: 'フィルター',
+                    search_placeholder: 'タイトルまたは説明を検索',
+                    type: 'タイプ',
+                    skills: 'スキル',
+                    tags: 'タグ',
+                    language: '言語',
+                    year: '年',
+                    clear: 'クリア',
+                    sort: '並び替え',
+                    newest_first: '新しい順',
+                    oldest_first: '古い順',
+                    label_languages: '言語'
+                    , type_project: 'プロジェクト'
+                    , type_publication: '出版'
+                    , type_presentation: 'プレゼンテーション'
+                },
+                ru: {
+                    filters: 'Фильтры',
+                    search_placeholder: 'Поиск по названию или описанию',
+                    type: 'Тип',
+                    skills: 'Навыки',
+                    tags: 'Теги',
+                    language: 'Язык',
+                    year: 'Год',
+                    clear: 'Сброс',
+                    sort: 'Сортировать',
+                    newest_first: 'Сначала новые',
+                    oldest_first: 'Сначала старые',
+                    label_languages: 'Языки'
+                    , type_project: 'Проект'
+                    , type_publication: 'Публикация'
+                    , type_presentation: 'Презентация'
+                },
+                fr: {
+                    filters: 'Filtres',
+                    search_placeholder: 'Rechercher titre ou description',
+                    type: 'Type',
+                    skills: 'Compétences',
+                    tags: 'Étiquettes',
+                    language: 'Langue',
+                    year: 'Année',
+                    clear: 'Effacer',
+                    sort: 'Trier',
+                    newest_first: 'Les plus récents',
+                    oldest_first: 'Les plus anciens',
+                    label_languages: 'Langues'
+                    , type_project: 'Projet'
+                    , type_publication: 'Publication'
+                    , type_presentation: 'Présentation'
+                }
+            });
+        }
+
+        function updatePublicationsLabels() {
+            const lang = document.getElementById('languageSelect')?.value || 'en';
+            const t = (key) => (window.translations && window.translations[lang] && window.translations[lang][key]) || (window.translations && window.translations['en'] && window.translations['en'][key]) || key;
+            const el = id => document.getElementById(id);
+            if (el('filtersHeading')) el('filtersHeading').textContent = t('filters');
+            if (el('searchLabel')) el('searchLabel').textContent = '';
+            if (el('searchInput')) el('searchInput').placeholder = t('search_placeholder');
+            if (el('typeLabel')) el('typeLabel').textContent = t('type');
+            if (el('skillsLabel')) el('skillsLabel').textContent = t('skills');
+            if (el('tagsLabel')) el('tagsLabel').textContent = t('tags');
+            if (el('languageLabel')) el('languageLabel').textContent = t('language');
+            if (el('yearLabel')) el('yearLabel').textContent = t('year');
+            if (el('clearFilters')) el('clearFilters').textContent = t('clear');
+            // Notify pages_browser to refresh localized strings
+            try { document.dispatchEvent(new CustomEvent('publicationsLabelsUpdated', { detail: lang })); } catch (e) { /* ignore */ }
+        }
+
+        document.addEventListener('languageChanged', updatePublicationsLabels);
+        // initial sync
+        updatePublicationsLabels();
+    </script>
+
+    <script src="pages_browser.js"></script>
 </main>

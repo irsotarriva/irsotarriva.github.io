@@ -7,17 +7,53 @@ body {
 }
 
 header {
-    background-color: hsl(208, 60%, 20%);
-    color: #fff;
-    padding: 1rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between; /* Ensure even spacing between elements */
-    flex-wrap: nowrap; /* Prevent wrapping of elements */
-    gap: 1rem; /* Add spacing between elements */
+    /* Two-row header: TopBar (blue) + LowerBar (white). Avatar bridges both rows. */
+    --topbar-height: 50px;
+    --lowerbar-height: 50px;
+    --avatar-size: calc(var(--topbar-height) + var(--lowerbar-height));
+    position: relative;
+    background: transparent;
+    /* individual bars define their backgrounds */
+    padding: 0;
+    /* bars have their own padding */
+    box-sizing: border-box;
 }
 
-header input, header select {
+:root {
+    --brand-color: hsl(208, 60%, 20%);
+}
+
+.TopBar {
+    background-color: var(--brand-color);
+    color: #fff;
+    height: var(--topbar-height);
+    display: flex;
+    align-items: center;
+    padding: 0 1rem;
+}
+
+/* Separator line matching TopBar color */
+.separator {
+    height: 2px;
+    width: 100%;
+    background-color: var(--brand-color);
+    border: none;
+    margin: 0;
+}
+
+.LowerBar {
+    background-color: #fff;
+    color: #333;
+    height: var(--lowerbar-height);
+    display: flex;
+    align-items: center;
+    padding: 0 3rem 0 calc(var(--avatar-size) + 3rem);
+    /* leave room for avatar on the left */
+    gap: 12px;
+}
+
+header input,
+header select {
     padding: 0.5rem;
     margin-left: 1rem;
 }
@@ -68,32 +104,75 @@ header input, header select {
 }
 
 .ProfileAvatar {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
+    position: absolute;
+    left: 1rem;
+    top: 1rem;
+    width: calc(var(--avatar-size) - 2rem);
+    height: calc(var(--avatar-size) - 2rem);
+    border-radius: 8px;
+    /* non-circle to read as bridging object; change to 50% if preferred */
     overflow: hidden;
     border: 3px solid #fff;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
     background-color: #ddd;
-    flex-shrink: 0; /* Prevent shrinking */
-    margin-right: 1rem; /* Add spacing between the avatar and the nav */
+    z-index: 10;
+}
+
+.ProfileAvatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .MainNav {
     display: flex;
-    justify-content: center; /* Center the navigation items */
-    flex: 1; /* Allow the nav to take up available space */
-    margin: 0; /* Reset any default margins */
+    justify-content: center;
+    flex: 1;
+    margin: 0;
+    padding-left: calc(var(--avatar-size) + 8px);
+    /* ensure nav items don't hide under avatar */
 }
 
 .langSelector {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: flex-end;
     gap: 6px;
-    margin-left: 1rem; /* Add spacing between the nav and the language selector */
-    flex-shrink: 0; /* Prevent shrinking */
+    margin-left: 0;
+    flex-shrink: 0;
     vertical-align: middle;
+}
+
+/* Quick actions: show icon + text inline. On small widths hide text and keep icons. */
+.HeaderQuickActions {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.HeaderQuickActions a {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    color: inherit;
+}
+
+.HeaderQuickActions a img {
+    height: 24px;
+    width: auto;
+    display: block;
+}
+
+/* Hide text when there's not enough horizontal space */
+@media (max-width: 720px) {
+    .HeaderQuickActions a span {
+        display: none;
+    }
+
+    .LowerBar {
+        padding-left: calc(var(--avatar-size) + 8px);
+    }
 }
 
 .story-section {
@@ -102,7 +181,8 @@ header input, header select {
     justify-content: center;
     padding: 20px;
     gap: 20px;
-    height: 400px; /* Ensure consistent height */
+    height: 400px;
+    /* Ensure consistent height */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     margin-bottom: 20px;
 }
@@ -177,6 +257,7 @@ header input, header select {
     .content {
         flex: 1;
     }
+
     .quickActions {
         width: 300px;
         flex-shrink: 0;
@@ -188,9 +269,11 @@ header input, header select {
         /* Make the bar span the available viewport height below the header */
         align-self: stretch;
         position: sticky;
-        top: var(--header-height, 64px); /* set --header-height on :root if you know the header height */
+        top: var(--header-height, 64px);
+        /* set --header-height on :root if you know the header height */
         height: calc(100vh - var(--header-height, 64px));
-        overflow: auto; /* allow internal scrolling if content exceeds the available height */
+        overflow: auto;
+        /* allow internal scrolling if content exceeds the available height */
     }
 
     header {
@@ -207,8 +290,10 @@ header input, header select {
         order: 2;
         width: 100%;
         display: flex;
-        justify-content: flex-start; /* Align items to the left */
-        flex: 1; /* Allow the nav to take up remaining space */
+        justify-content: flex-start;
+        /* Align items to the left */
+        flex: 1;
+        /* Allow the nav to take up remaining space */
     }
 
     .langSelector {

@@ -52,6 +52,9 @@ if (window.__translationsJsLoaded) {
                 || key;
             el.textContent = text;
         });
+        try {
+            document.dispatchEvent(new CustomEvent('languageChanged', { detail: language }));
+        } catch (e) { /* ignore environments without CustomEvent */ }
     }
 
     // Replace top-level const with an IIFE so re-loading doesn't redeclare globals

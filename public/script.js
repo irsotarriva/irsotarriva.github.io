@@ -17,11 +17,15 @@
             });
         }
 
-        // Fetch and display projects
-        fetch('/api/projects')
+        // Fetch and display projects (prefer local data file)
+        fetch('/data/projects.json')
             .then(response => response.json())
             .then(projects => {
                 displayProjects(projects);
+            })
+            .catch(() => {
+                // fallback to API endpoint if local file isn't present
+                return fetch('/api/projects').then(response => response.json()).then(projects => displayProjects(projects)).catch(() => { });
             });
 
         /**
@@ -60,7 +64,7 @@
          * @public
          */
         function fetchAndDisplayProjects(lang) {
-            fetch('/api/projects')
+            fetch('/data/projects.json')
                 .then(response => response.json())
                 .then(projects => {
                     const localizedProjects = projects.map(project => {
@@ -77,6 +81,25 @@
                         return copy;
                     });
                     displayProjects(localizedProjects);
+                })
+                .catch(() => {
+                    // fallback to API endpoint
+                    return fetch('/api/projects').then(response => response.json()).then(projects => {
+                        const localizedProjects = projects.map(project => {
+                            const copy = Object.assign({}, project);
+                            if (copy.title && typeof copy.title === 'object') {
+                                copy.title = copy.title[lang] || copy.title['en'] || Object.values(copy.title)[0];
+                            }
+                            if (copy.description && typeof copy.description === 'object') {
+                                copy.description = copy.description[lang] || copy.description['en'] || Object.values(copy.description)[0];
+                            }
+                            if (copy.image && typeof copy.image === 'object') {
+                                copy.image = copy.image[lang] || copy.image['en'] || Object.values(copy.image)[0];
+                            }
+                            return copy;
+                        });
+                        displayProjects(localizedProjects);
+                    }).catch(() => { });
                 });
         }
 

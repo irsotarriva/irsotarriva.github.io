@@ -1,0 +1,233 @@
+[
+    {
+        "id": 1,
+        "key": "Github Collaboration",
+        "label": {
+            "en": "Github Collaboration",
+            "es": "Colaboración en GitHub",
+            "ja": "GitHub コラボレーション",
+            "ru": "Сотрудничество GitHub",
+            "fr": "Collaboration GitHub"
+        }
+    },
+    {
+        "id": 2,
+        "key": "Athena Framework",
+        "label": {
+            "en": "Athena Framework",
+            "es": "Athena Framework",
+            "ja": "Athena フレームワーク",
+            "ru": "Athena Framework",
+            "fr": "Athena Framework"
+        }
+    },
+    {
+        "id": 3,
+        "key": "Physics Analysis",
+        "label": {
+            "en": "Physics Analysis",
+            "es": "Análisis de física",
+            "ja": "物理解析",
+            "ru": "Физический анализ",
+            "fr": "Analyse physique"
+        }
+    },
+    {
+        "id": 4,
+        "key": "Monte Carlo Simulation",
+        "label": {
+            "en": "Monte Carlo Simulation",
+            "es": "Simulación Monte Carlo",
+            "ja": "モンテカルロシミュレーション",
+            "ru": "Моделирование Монте-Карло",
+            "fr": "Simulation de Monte-Carlo"
+        }
+    },
+    {
+        "id": 5,
+        "key": "Optimal Transport",
+        "label": {
+            "en": "Optimal Transport",
+            "es": "Transporte óptimo",
+            "ja": "最適輸送",
+            "ru": "Оптимальный транспорт",
+            "fr": "Transport optimal"
+        }
+    },
+    {
+        "id": 6,
+        "key": "Uncertainty modeling",
+        "label": {
+            "en": "Uncertainty modeling",
+            "es": "Modelado de incertidumbre",
+            "ja": "不確実性モデリング",
+            "ru": "Моделирование неопределенности",
+            "fr": "Modélisation de l'incertitude"
+        }
+    },
+    {
+        "id": 7,
+        "key": "Data Analysis",
+        "label": {
+            "en": "Data Analysis",
+            "es": "Análisis de datos",
+            "ja": "データ分析",
+            "ru": "Анализ данных",
+            "fr": "Analyse des données"
+        }
+    },
+    {
+        "id": 8,
+        "key": "Pytorch Geometric",
+        "label": {
+            "en": "Pytorch Geometric",
+            "es": "Pytorch Geometric",
+            "ja": "Pytorch Geometric",
+            "ru": "Pytorch Geometric",
+            "fr": "Pytorch Geometric"
+        }
+    },
+    {
+        "id": 9,
+        "key": "Keras",
+        "label": {
+            "en": "Keras",
+            "es": "Keras",
+            "ja": "Keras",
+            "ru": "Keras",
+            "fr": "Keras"
+        }
+    },
+    {
+        "id": 10,
+        "key": "open-CV",
+        "label": {
+            "en": "open-CV",
+            "es": "open-CV",
+            "ja": "open-CV",
+            "ru": "open-CV",
+            "fr": "open-CV"
+        }
+    },
+    {
+        "id": 11,
+        "key": "Algorithm Optimization",
+        "label": {
+            "en": "Algorithm Optimization",
+            "es": "Optimización de algoritmos",
+            "ja": "アルゴリズム最適化",
+            "ru": "Оптимизация алгоритмов",
+            "fr": "Optimisation d'algorithmes"
+        }
+    },
+    {
+        "id": 12,
+        "key": "Algorithm Development",
+        "label": {
+            "en": "Algorithm Development",
+            "es": "Desarrollo de algoritmos",
+            "ja": "アルゴリズム開発",
+            "ru": "Разработка алгоритмов",
+            "fr": "Développement d'algorithmes"
+        }
+    },
+    {
+        "id": 13,
+        "key": "Feature Engineering",
+        "label": {
+            "en": "Feature Engineering",
+            "es": "Ingeniería de características",
+            "ja": "特徴量エンジニアリング",
+            "ru": "Инженерия признаков",
+            "fr": "Ingénierie des caractéristiques"
+        }
+    },
+    {
+        "id": 14,
+        "key": "Local LLMs",
+        "label": {
+            "en": "Local LLMs",
+            "es": "LLM locales",
+            "ja": "ローカルLLM",
+            "ru": "Локальные LLM",
+            "fr": "LLM locaux"
+        }
+    },
+    {
+        "id": 15,
+        "key": "Vector Search",
+        "label": {
+            "en": "Vector Search",
+            "es": "Búsqueda vectorial",
+            "ja": "ベクトル検索",
+            "ru": "Векторный поиск",
+            "fr": "Recherche vectorielle"
+        }
+    },
+    {
+        "id": 16,
+        "key": "fastAPI",
+        "label": {
+            "en": "fastAPI",
+            "es": "fastAPI",
+            "ja": "fastAPI",
+            "ru": "fastAPI",
+            "fr": "fastAPI"
+        }
+    },
+    {
+        "id": 17,
+        "key": "Data visualization",
+        "label": {
+            "en": "Data visualization",
+            "es": "Visualización de datos",
+            "ja": "データ可視化",
+            "ru": "Визуализация данных",
+            "fr": "Visualisation des données"
+        }
+    },
+    {
+        "id": 18,
+        "key": "REST APIs",
+        "label": {
+            "en": "REST APIs",
+            "es": "APIs REST",
+            "ja": "REST API",
+            "ru": "REST API",
+            "fr": "APIs REST"
+        }
+    },
+    {
+        "id": 19,
+        "key": "Vercel Deployment",
+        "label": {
+            "en": "Vercel Deployment",
+            "es": "Despliegue en Vercel",
+            "ja": "Vercel デプロイ",
+            "ru": "Развертывание на Vercel",
+            "fr": "Déploiement Vercel"
+        }
+    },
+    {
+        "id": 20,
+        "key": "Transformers",
+        "label": {
+            "en": "Transformers",
+            "es": "Transformers",
+            "ja": "トランスフォーマー",
+            "ru": "Transformers",
+            "fr": "Transformers"
+        }
+    },
+    {
+        "id": 21,
+        "key": "Pytorch",
+        "label": {
+            "en": "Pytorch",
+            "es": "Pytorch",
+            "ja": "Pytorch",
+            "ru": "Pytorch",
+            "fr": "Pytorch"
+        }
+    }
+]

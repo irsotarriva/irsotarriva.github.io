@@ -1,7 +1,219 @@
+<main>
+    <div class="detail-container" style="padding:18px;max-width:1000px;margin:0 auto;">
+        <a href="#" id="backLink">← Back</a>
+        <h1 id="itemTitle">Loading…</h1>
+        <div style="display:flex;gap:18px;align-items:flex-start;flex-wrap:wrap">
+            <div style="flex:1 1 320px;max-width:360px">
+                <img id="itemImage" src="" alt=""
+                    style="width:100%;border-radius:8px;object-fit:cover;max-height:420px">
+                <div id="meta" style="margin-top:8px;color:#444"></div>
+            </div>
+            <div style="flex:2 1 420px">
+                <p id="itemDescription" style="color:#444"></p>
+                <div id="itemContent" style="margin-top:12px"></div>
+            </div>
+        </div>
+    </div>
 
-<section id="detail">
-    <!-- Dynamic content for the selected project/conference -->
-</section>
-<script>
-    document.getElementById('header-placeholder').innerHTML = await fetch('header.html').then(res => res.text());
-</script>
+    <script>
+        (function () {
+            function q(param) { return new URLSearchParams(window.location.search).get(param) }
+            const id = q('id');
+            const source = q('source') || 'projects';
+            const backLink = document.getElementById('backLink');
+            backLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                const hs = history.state;
+                // if we have SPA state for previous page, load it without pushing new history
+                if (hs && hs.page && typeof window.loadPage === 'function') {
+                    window.loadPage(hs.page, undefined, undefined, false);
+                } else {
+                    history.back();
+                }
+            });
+
+            // register detail page specific translations (uses same language keys as header)
+            if (typeof registerTranslations === 'function') {
+                registerTranslations({
+                    en: {
+                        back: "Back",
+                        label_tags: "Tags",
+                        label_topic: "Topic",
+                        label_skills: "Skills"
+                    },
+                    es: {
+                        back: "Atrás",
+                        label_tags: "Tags",
+                        label_topic: "Tema",
+                        label_skills: "Habilidades"
+                    },
+                    ja: {
+                        back: "戻る",
+                        label_tags: "タグ",
+                        label_topic: "トピック",
+                        label_skills: "スキル"
+                    },
+                    ru: {
+                        back: "Назад",
+                        label_tags: "Теги",
+                        label_topic: "Тема",
+                        label_skills: "Навыки"
+                    },
+                    fr: {
+                        back: "Retour",
+                        label_tags: "Étiquettes",
+                        label_topic: "Sujet",
+                        label_skills: "Compétences"
+                    }
+                });
+            }
+
+
+            // helper to fetch a list from api then data file
+            async function fetchJson(endpoints) {
+                for (const u of endpoints) {
+                    try {
+                        const res = await fetch(u);
+                        if (!res.ok) continue;
+                        const json = await res.json();
+                        return json;
+                    } catch (e) { continue }
+                }
+                return [];
+            }
+
+            async function fetchLists() {
+                // Prefer local data files first to avoid noisy 404s for missing /api endpoints
+                const primary = await fetchJson([`/data/${source}.json`, `/api/${source}`, `/${source}.json`]);
+                const projects = await fetchJson(['/data/projects.json', '/api/projects', '/projects.json']);
+                const tags = await fetchJson(['/data/tags.json', '/api/tags', '/tags.json']);
+                const skills = await fetchJson(['/data/skills.json', '/api/skills', '/skills.json']);
+                return { primary: primary || [], projects: projects || [], tags: tags || [], skills: skills || [] };
+            }
+
+            function findItem(list) {
+                if (!id) return null;
+                return list.find(it => String(it.id) === String(id) || it.slug === id || (it.title && (it.title === id || it.title.en === id)));
+            }
+
+            function mergeWithParent(child, parent) {
+                if (!parent) return child;
+                const res = Object.assign({}, parent, child);
+                ['title', 'description', 'image'].forEach(k => {
+                    if (parent[k] && typeof parent[k] === 'object') {
+                        res[k] = Object.assign({}, parent[k], (child[k] && typeof child[k] === 'object') ? child[k] : {});
+                    }
+                });
+                return res;
+            }
+
+            (async () => {
+                const { primary: list, projects, tags, skills } = await fetchLists();
+                let item = findItem(list);
+                // If item not found in primary and source isn't projects, try projects
+                if (!item && source !== 'projects') {
+                    item = findItem(projects);
+                }
+                if (!item) {
+                    document.getElementById('itemTitle').textContent = 'Item not found';
+                    return;
+                }
+                // If this item references a parent project, merge fields from parent
+                const parentId = item.parent_id || item.parent || item.project_id;
+                if (parentId) {
+                    const projMap = new Map((projects || []).map(p => [p.id, p]));
+                    const parent = projMap.get(parentId) || projMap.get(String(parentId));
+                    if (parent) item = mergeWithParent(item, parent);
+                }
+                // build tag/skill maps for lookups (supports numeric ids or key strings)
+                const tagsMap = new Map((tags || []).map(t => [t.id, t]));
+                const skillsMap = new Map((skills || []).map(s => [s.id, s]));
+                // render function so we can re-run when language changes
+                function renderItem() {
+                    const lang = document.getElementById('languageSelect')?.value || 'en';
+                    const pick = (field) => {
+                        if (!field) return null;
+                        if (typeof field === 'object') return field[lang] || field.en || Object.values(field)[0] || null;
+                        return field;
+                    };
+                    const t = (key) => (window.translations && window.translations[lang] && window.translations[lang][key]) || (window.translations && window.translations['en'] && window.translations['en'][key]) || null;
+
+                    // update Back link text using translations
+                    try {
+                        backLink.innerHTML = '← ' + (t('back') || 'Back');
+                    } catch (e) { /* ignore */ }
+
+                    document.getElementById('itemTitle').textContent = pick(item.title) || 'Untitled';
+                    const imgEl = document.getElementById('itemImage');
+                    const img = pick(item.image);
+                    if (img) { imgEl.style.display = ''; imgEl.src = img; } else { imgEl.style.display = 'none'; }
+
+                    const descEl = document.getElementById('itemDescription');
+                    const contentHtml = pick(item.content) || pick(item.body);
+                    if (contentHtml) {
+                        descEl.style.display = 'none';
+                    } else {
+                        descEl.style.display = '';
+                        descEl.textContent = pick(item.description) || '';
+                    }
+
+                    // meta: tags, language, topic, skills, year
+                    const meta = document.getElementById('meta');
+                    const parts = [];
+                    const resolveTagLabel = (tag) => {
+                        if (!tag) return null;
+                        if (typeof tag === 'number' || (/^\d+$/.test(String(tag)))) {
+                            const obj = tagsMap.get(Number(tag));
+                            if (obj) return pick(obj.label) || obj.key || String(tag);
+                            return String(tag);
+                        }
+                        if (typeof tag === 'object') return pick(tag.label) || tag.key || tag.name || '';
+                        // string: try to find by key or name
+                        const found = Array.from(tagsMap.values()).find(v => v.key === tag || v.key === String(tag) || (v.label && (v.label.en === tag || Object.values(v.label).includes(tag))));
+                        if (found) return pick(found.label) || found.key || tag;
+                        return tag;
+                    };
+                    if (item.tags && item.tags.length) {
+                        const labels = item.tags.map(resolveTagLabel);
+                        parts.push((t('label_tags') || 'Tags') + ': ' + labels.join(', '));
+                    }
+                    if (item.language) parts.push((t('label_language') || 'Language') + ': ' + item.language);
+                    if (item.year) parts.push((t('label_year') || 'Year') + ': ' + item.year);
+                    const resolveSkillLabel = (skill) => {
+                        if (!skill) return null;
+                        if (typeof skill === 'number' || (/^\d+$/.test(String(skill)))) {
+                            const obj = skillsMap.get(Number(skill));
+                            if (obj) return pick(obj.label) || obj.key || String(skill);
+                            return String(skill);
+                        }
+                        if (typeof skill === 'object') return pick(skill.label) || skill.key || skill.name || '';
+                        const found = Array.from(skillsMap.values()).find(v => v.key === skill || v.key === String(skill) || (v.label && (v.label.en === skill || Object.values(v.label).includes(skill))));
+                        if (found) return pick(found.label) || found.key || skill;
+                        return skill;
+                    };
+                    if (item.skills && item.skills.length) {
+                        const skillNames = item.skills.map(s => resolveSkillLabel((s && (s.id || s.name)) || s));
+                        parts.push(((t('label_skills')) || 'Skills') + ': ' + skillNames.join(', '));
+                    }
+                    meta.textContent = parts.join(' • ');
+
+                    // content (may contain HTML)
+                    const contentEl = document.getElementById('itemContent');
+                    if (contentHtml) {
+                        contentEl.innerHTML = contentHtml;
+                    } else {
+                        contentEl.innerHTML = '';
+                    }
+                }
+
+                // initial render
+                renderItem();
+
+                // re-render when translations change (header translates page and dispatches event)
+                document.addEventListener('languageChanged', () => {
+                    try { renderItem(); } catch (e) { /* ignore */ }
+                });
+            })();
+        })();
+    </script>
+</main>

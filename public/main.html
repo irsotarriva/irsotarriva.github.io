@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
     <link rel="stylesheet" href="styles.css">
     <script src="translations.js"></script>
 </head>
+
 <body>
     <!-- Include header -->
     <div id="header-placeholder"></div>
@@ -63,8 +65,7 @@
 
             // Fetch and display the main content based on calls from the navigation
             const tabToPage = {
-                home: 'home.html',
-                publicationsAndConferences: 'publications_and_conferences.html',
+                home: 'publications_and_conferences.html',
                 educationAndEmployment: 'education_and_employment.html',
                 detailPage: 'detail_page.html'
             };
@@ -75,9 +76,22 @@
             @return {Promise<void>}
             @public
             */
-            async function loadPage(page) {
+            async function loadPage(page, queryString, stateObj, pushHistory = true) {
                 const pageUrl = tabToPage[page];
                 if (!pageUrl) return;
+
+                // Update browser URL so loaded page scripts can read search params
+                if (pushHistory) {
+                    if (typeof queryString !== 'undefined') {
+                        const newUrl = window.location.pathname + (queryString ? ('?' + queryString) : '');
+                        try { history.pushState(stateObj || { page }, '', newUrl); } catch (e) { /* ignore */ }
+                    } else if (page !== 'detailPage') {
+                        try { history.replaceState(stateObj || { page }, '', window.location.pathname); } catch (e) { /* ignore */ }
+                    }
+                }
+
+                // expose current page for other modules
+                window.__currentPage = page;
 
                 const content = await fetch(pageUrl).then(res => res.text());
                 const mainEl = document.getElementById('main-content');
@@ -113,6 +127,19 @@
             }
             // Load the home page by default
             await loadPage('home');
+            // handle back/forward navigation: load pages according to history state or URL
+            window.addEventListener('popstate', (ev) => {
+                const qs = window.location.search || '';
+                if (qs && qs.includes('id=')) {
+                    // load detail without pushing new history entry
+                    window.loadPage('detailPage', qs.replace(/^\?/, ''), undefined, false);
+                    return;
+                }
+                // restore page from state if available
+                const state = ev.state;
+                const pageToLoad = (state && state.page) ? state.page : 'home';
+                window.loadPage(pageToLoad, undefined, undefined, false);
+            });
             // Expose loadPage to global scope
             window.loadPage = loadPage;
 
@@ -127,4 +154,5 @@
         })();
     </script>
 </body>
+
 </html>
