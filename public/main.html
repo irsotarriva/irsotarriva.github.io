@@ -7,6 +7,34 @@
     <title>Isai Sotarriva's home page</title>
     <link rel="stylesheet" href="styles.css">
     <script src="translations.js"></script>
+    <!-- Adjust absolute asset paths at runtime so assets work both when served from /public/ (static hosting)
+         and when the `public` folder is the server root (Node/express). -->
+    <script>
+        (function () {
+            const PUBLIC_PREFIX = '/public';
+            const servedFromPublicDir = location.pathname.indexOf('/public/') !== -1;
+
+            function fixAttr(el, attr) {
+                const v = el.getAttribute(attr);
+                if (!v) return;
+                if (attr === 'style') {
+                    // fix url('/assets/...') inside inline style attributes
+                    const newStyle = v.replace(/url\((['"]?)\/assets\//g, (m, q) => `url(${q}${servedFromPublicDir ? PUBLIC_PREFIX + '/assets/' : '/assets/'}`);
+                    if (newStyle !== v) el.setAttribute('style', newStyle);
+                } else if (v.startsWith('/assets/')) {
+                    el.setAttribute(attr, servedFromPublicDir ? (PUBLIC_PREFIX + v) : v);
+                }
+            }
+
+            document.addEventListener('DOMContentLoaded', () => {
+                document.querySelectorAll('[src],[href],[style]').forEach(el => {
+                    fixAttr(el, 'src');
+                    fixAttr(el, 'href');
+                    fixAttr(el, 'style');
+                });
+            });
+        })();
+    </script>
 </head>
 
 <body>
