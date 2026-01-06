@@ -7,22 +7,18 @@
     <title>Isai Sotarriva's home page</title>
     <link rel="stylesheet" href="styles.css">
     <script src="translations.js"></script>
-    <!-- Adjust absolute asset paths at runtime so assets work both when served from /public/ (static hosting)
-         and when the `public` folder is the server root (Node/express). -->
+    <!-- Adjust absolute asset paths at runtime so assets work consistently -->
     <script>
         (function () {
-            const PUBLIC_PREFIX = '/public';
-            const servedFromPublicDir = location.pathname.indexOf('/public/') !== -1;
-
             function fixAttr(el, attr) {
                 const v = el.getAttribute(attr);
                 if (!v) return;
                 if (attr === 'style') {
                     // fix url('/assets/...') inside inline style attributes
-                    const newStyle = v.replace(/url\((['"]?)\/assets\//g, (m, q) => `url(${q}${servedFromPublicDir ? PUBLIC_PREFIX + '/assets/' : '/assets/'}`);
+                    const newStyle = v.replace(/url\((['"]?)\/(public\/)?assets\//g, (m, q) => `url(${q}/assets/`);
                     if (newStyle !== v) el.setAttribute('style', newStyle);
-                } else if (v.startsWith('/assets/')) {
-                    el.setAttribute(attr, servedFromPublicDir ? (PUBLIC_PREFIX + v) : v);
+                } else if (v.startsWith('/public/assets/') || v.startsWith('/assets/')) {
+                    el.setAttribute(attr, v.replace('/public/assets/', '/assets/'));
                 }
             }
 
